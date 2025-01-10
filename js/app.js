@@ -19,7 +19,7 @@ function minutesSeconds(seconds) {
 
 async function getSongs(folder) {
   currFolder = folder;
-  let response = await fetch(`http://127.0.0.1:5500/${folder}/`);
+  let response = await fetch(`/${folder}/`);
 
   let htmlContent = await response.text();
   // console.log("HTML Content:", htmlContent);
@@ -77,7 +77,7 @@ const playMusic = (track, pause=false) => {
 }
 
 async function displayAlbums() {
-  let response = await fetch(`http://127.0.0.1:5500/songs/`);
+  let response = await fetch(`/songs/`);
 
   let htmlContent = await response.text();
 
@@ -94,7 +94,7 @@ async function displayAlbums() {
     if(e.href.includes("/songs/") && !e.href.includes(".htaccess")) {
       let folder = e.href.split("/").slice(-1)[0];
       // Get the metadata of the folder
-      let response = await fetch(`http://127.0.0.1:5500/songs/${folder}/info.json`);
+      let response = await fetch(`/songs/${folder}/info.json`);
       let htmlContent = await response.json();
       console.log(htmlContent);
       cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
